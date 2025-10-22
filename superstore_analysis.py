@@ -42,7 +42,7 @@ def calculate_percent_discounted(superstore_data):
     discounted_orders = sum(1 for row in superstore_data if row['Discount'] > 0)  # count how many had a discount
     return round((discounted_orders / total_orders) * 100, 2)  # percent of orders with discount
 
-#Added Antonios Functions from his file
+#Added Antonio's Functions from his file
 
 # ANTONIO FUNCTION 1 
 def calculate_avg_sales_by_category(superstore_data):
@@ -66,3 +66,18 @@ def calculate_percent_profitable(superstore_data):
     total_orders = len(superstore_data)
     profitable_orders = sum(1 for row in superstore_data if row['Profit'] > 0)  # only count positive profit
     return round((profitable_orders / total_orders) * 100, 2)  # percent of profitable orders
+
+# WRITE RESULTS TO FILE
+def generate_report(avg_profit, percent_discounted, avg_sales, percent_profitable):
+    with open("superstore_results.txt", "w") as f:
+        f.write("Matthew’s Calculations\n")
+        f.write("Average Profit by Region:\n")
+        for region, profit in avg_profit.items():
+            f.write(f"{region}: ${profit}\n")
+        f.write(f"\nPercentage of Orders with Discount > 0: {percent_discounted}%\n\n")
+
+        f.write("Antonio’s Calculations\n")
+        f.write("Average Sales by Category:\n")
+        for cat, sales in avg_sales.items():
+            f.write(f"{cat}: ${sales}\n")
+        f.write(f"\nPercentage of Orders with Profit > 0: {percent_profitable}%\n")
