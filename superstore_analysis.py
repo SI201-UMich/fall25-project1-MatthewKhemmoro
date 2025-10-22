@@ -2,7 +2,20 @@
 # Student id: 5598 1840
 # Email: mattkhem@umich.edu
 
+import csv
 
+# Load CSV Data together with partner
+def read_csv_file(filename):
+    data = []
+    with open(filename, newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)  # reads each row as a dictionary
+        for row in reader:
+            # convert numeric strings to float for math later
+            row['Profit'] = float(row['Profit'])
+            row['Sales'] = float(row['Sales'])
+            row['Discount'] = float(row['Discount'])
+            data.append(row)  # add the cleaned-up row to the list
+    return data
 
 
 # MATTHEW FUNCTION 1
